@@ -1,19 +1,24 @@
-﻿var mod = angular.module('wikiEngineApp', [
-    'ngRoute',
+﻿(function() {
 
-    'controllers',
-    'services'
-]);
+    var mod = angular.module('app', [
+        'ngRoute',
+        'ngResource'
+    ]);
 
-mod.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/page', {
-            templateUrl: 'app/layout/PageList.html',
-            controller: 'PageList'
-        })
-        .when('/page/:pageId', {
-            templateUrl: 'app/layout/PageItem.html',
-            controller: 'PageItem'
-        })
-        .otherwise({ redirectTo: '/page' });
-}]);
+    mod.config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/page', {
+                templateUrl: 'app/views/page/list.html',
+                controller: 'app.views.page.list'
+            })
+            .when('/page/:pageId', {
+                templateUrl: 'app/views/page/item.html',
+                controller: 'app.views.page.item'
+            })
+            .when('/new', {
+                templateUrl: 'app/layout/page/edit.html',
+                controller: 'app.views.page.edit'
+            })
+            .otherwise({ redirectTo: '/page' });
+    }]);
+})();

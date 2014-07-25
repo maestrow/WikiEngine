@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WikiEngine", "WikiEngine\WikiEngine.csproj", "{274A8BA6-2B7B-44E5-BB21-8BA6757A40BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A634F4DE-3F04-4F93-9718-BA11F4DF367C}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+		tasks.md = tasks.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

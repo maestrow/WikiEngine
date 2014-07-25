@@ -142,7 +142,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -151,8 +150,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\layout\PageItem.html" />
-    <Content Include="app\layout\PageList.html" />
+    <Content Include="app\views\page\item.html" />
+    <Content Include="app\views\page\item.js" />
+    <Content Include="app\views\page\list.html" />
+    <Content Include="app\views\page\list.js" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -191,8 +192,7 @@
     <Content Include="Scripts\angular-resource.min.js.map" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="app\app.js" />
-    <Content Include="app\controllers.js" />
-    <Content Include="app\services.js" />
+    <Content Include="app\views\page\services.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
