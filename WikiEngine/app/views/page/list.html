@@ -11,8 +11,8 @@
                 <td>{{item.title}}</td>
                 <td>
                     <a href="#/page/{{item.id}}">open</a>
-                    <a href="#/page/{{item.id}}/edit">edit</a>
-                    <a href="#/page/{{item.id}}/delete">delete</a>
+                    <a href="#/page/edit/{{item.id}}">edit</a>
+                    <a href ng-click="delete(item)">delete</a>
                 </td>
             </tr>
         </tbody>

@@ -1,15 +1,6 @@
 ﻿<div class="row">
-    <div ng-hide="editorEnabled">
-        <a href ng-click="startEditing()">Редактировать</a>
-        <h3>{{item.title}}</h3>
-        <div>Изменен: {{item.lastEditAt}}, Создан: {{item.createdAt}}</div>
-        <div>{{item.content}}</div>
-    </div>
-    <div ng-show="editorEnabled">
-        <input ng-model="item.title" size="80" />
-        <br/>
-        <textarea ng-model="item.content" rows="20" cols="80"></textarea>
-				<a href ng-click="save()">Сохранить</a>
-				<a href ng-click="cancel()">Отменить</a>
-    </div>
+	<a href="#/page/edit/{{item.id}}">Редактировать</a>
+	<h3>{{item.title}}</h3>
+	<div>Изменен: {{item.lastEditAt}}, Создан: {{item.createdAt}}</div>
+	<div>{{item.content}}</div>
 </div>

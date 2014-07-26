@@ -150,6 +150,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\views\page\edit.html" />
+    <Content Include="app\views\page\edit.js" />
     <Content Include="app\views\page\item.html" />
     <Content Include="app\views\page\item.js" />
     <Content Include="app\views\page\list.html" />
