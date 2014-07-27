@@ -6,27 +6,28 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WikiEngine.Models;
 
 namespace WikiEngine.Controllers
 {
-    public class PageController : ApiController
+    public class PageAsyncController : ApiController
     {
         private WikiEngineContext db = new WikiEngineContext();
 
-        // GET: api/Page
+        // GET api/Page
         public IQueryable<Page> GetPages()
         {
             return db.Pages;
         }
 
-        // GET: api/Page/5
+        // GET api/Page/5
         [ResponseType(typeof(Page))]
-        public IHttpActionResult GetPage(int id)
+        public async Task<IHttpActionResult> GetPage(int id)
         {
-            Page page = db.Pages.Find(id);
+            Page page = await db.Pages.FindAsync(id);
             if (page == null)
             {
                 return NotFound();
@@ -35,9 +36,8 @@ namespace WikiEngine.Controllers
             return Ok(page);
         }
 
-        // PUT: api/Page/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPage(int id, Page page)
+        // PUT api/Page/5
+        public async Task<IHttpActionResult> PutPage(int id, [FromBody] Page page)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace WikiEngine.Controllers
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -70,9 +70,9 @@ namespace WikiEngine.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Page
+        // POST api/Page
         [ResponseType(typeof(Page))]
-        public IHttpActionResult PostPage(Page page)
+        public async Task<IHttpActionResult> PostPage(Page page)
         {
             if (!ModelState.IsValid)
             {
@@ -80,23 +80,23 @@ namespace WikiEngine.Controllers
             }
 
             db.Pages.Add(page);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = page.Id }, page);
         }
 
-        // DELETE: api/Page/5
+        // DELETE api/Page/5
         [ResponseType(typeof(Page))]
-        public IHttpActionResult DeletePage(int id)
+        public async Task<IHttpActionResult> DeletePage(int id)
         {
-            Page page = db.Pages.Find(id);
+            Page page = await db.Pages.FindAsync(id);
             if (page == null)
             {
                 return NotFound();
             }
 
             db.Pages.Remove(page);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Ok(page);
         }
