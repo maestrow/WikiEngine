@@ -7,6 +7,11 @@ namespace WikiEngine.Models
 {
     public class Page
     {
+        public Page()
+        {
+            LastEditAt = CreatedAt = DateTime.Now;
+        }
+
         public int Id { get; set; }
         public DateTime CreatedAt { get; set; }
 

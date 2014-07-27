@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Web;
 using WikiEngine.Models;
 
-namespace WikiEngine
+namespace WikiEngine.Migrations
 {
-    public class DbInitializer: DropCreateDatabaseIfModelChanges<WikiEngineContext>
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<WikiEngine.Models.WikiEngineContext>
     {
-        private DbInitializer() {}
-
-        private static DbInitializer _instance;
-
-        public static DbInitializer Instance
+        public Configuration()
         {
-            get
-            {
-                if(_instance == null)
-                    _instance = new DbInitializer();
-                return _instance;
-            }
+            AutomaticMigrationsEnabled = false;
+            ContextKey = "WikiEngine.Models.WikiEngineContext";
         }
 
-        protected override void Seed(WikiEngineContext context)
+        protected override void Seed(WikiEngine.Models.WikiEngineContext context)
         {
+            //  This method will be called after migrating to the latest version.
+
             context.Pages.AddOrUpdate(page => page.Id,
                 new Page() { CreatedAt = new DateTime(2014, 07, 03), LastEditAt = new DateTime(2014, 07, 07), Title = "111", Content = "aaaaa" },
                 new Page() { CreatedAt = new DateTime(2014, 07, 04), LastEditAt = new DateTime(2014, 07, 07), Title = "222", Content = "bbbbb" },
