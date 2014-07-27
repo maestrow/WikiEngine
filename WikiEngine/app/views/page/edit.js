@@ -4,11 +4,25 @@
     mod.controller('app.views.page.edit', ['$scope', '$routeParams', '$location', 'Page',
         function ($scope, $routeParams, $location, Page) {
 
-            $scope.item = Page.get({ id: $routeParams.id });
+            var goTo = function(id) {
+                $location.path('/page/' +id);
+            };
+
+            $scope.isNew = !angular.isDefined($routeParams.id);
+
+            $scope.item = !$scope.isNew
+                ? Page.get({ id: $routeParams.id })
+                : new Page();
 
             $scope.save = function () {
-                this.item.$save({ id: this.item.id });
-                $location.path('/page/' + this.item.id);
+                if (this.isNew)
+                    this.item.$save(function(data) {
+                        goTo(data.id);
+                    });
+                else
+                    this.item.$update({ id: this.item.id }, function() {
+                        goTo($scope.item.id);
+                    });
             };
         }
     ]);
