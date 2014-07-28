@@ -13,6 +13,7 @@ using WikiEngine.Models;
 
 namespace WikiEngine.Controllers
 {
+    // ToDo: Удалить данный контроллер
     public class PageAsyncController : ApiController
     {
         private WikiEngineContext db = new WikiEngineContext();

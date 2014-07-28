@@ -2,7 +2,8 @@
 
     var mod = angular.module('app', [
         'ngRoute',
-        'ngResource'
+        'ngResource',
+        'ui.bootstrap'
     ]);
 
     mod.config(['$routeProvider', function($routeProvider) {

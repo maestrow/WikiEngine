@@ -17,11 +17,6 @@ namespace WikiEngine
                 "~/Scripts/modernizr-*"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"
-                ));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"
@@ -30,11 +25,12 @@ namespace WikiEngine
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-resource.js",
-                "~/Scripts/angular-route.js"
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                .Include("~/app/app.js")
+                .IncludeDirectory("~/app", "*.js")
                 .IncludeDirectory("~/app/views/page", "*.js", true
                 ));
         }

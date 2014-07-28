@@ -1,20 +1,29 @@
 ﻿<div class="row">
-    <table border="1">
-        <thead>
-        <th>Изменен</th>
-        <th>Заголовок</th>
-        <th></th>
-        </thead>
-        <tbody>
-            <tr ng-repeat="item in items">
-                <td>{{item.lastEditAt}}</td>
-                <td>{{item.title}}</td>
-                <td>
-                    <a href="#/page/{{item.id}}">open</a>
-                    <a href="#/page/edit/{{item.id}}">edit</a>
-                    <a href ng-click="delete(item)">delete</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+	<table border="1">
+		<thead>
+			<th>Изменен</th>
+			<th>Заголовок</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in items">
+				<td>{{item.lastEditAt}}</td>
+				<td>{{item.title}}</td>
+				<td>
+					<a href="#/page/{{item.id}}">open</a>
+					<a href="#/page/edit/{{item.id}}">edit</a>
+					<a href ng-click="delete(item)">delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<pagination 
+		class="pagination-sm" 
+		ng-model="currentPage" 
+		total-items="totalItems"
+		max-size="maxSize"
+		ng-change="pageChanged()"
+		>
+	</pagination>
+
 </div>
