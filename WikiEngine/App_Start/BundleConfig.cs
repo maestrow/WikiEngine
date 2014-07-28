@@ -26,7 +26,8 @@ namespace WikiEngine
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-resource.js",
                 "~/Scripts/angular-route.js",
-                "~/Scripts/angular-ui/ui-bootstrap-tpls.js"
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/angular-ui/ui-utils.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/app")

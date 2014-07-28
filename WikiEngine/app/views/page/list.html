@@ -1,14 +1,19 @@
 ﻿<div class="row">
+	Поиск: <input ng-model="search" ui-event="{ blur: 'refresh()' }" />
 	<table border="1">
 		<thead>
+			<th>Создан</th>
 			<th>Изменен</th>
 			<th>Заголовок</th>
+			<th>Отрывок</th>
 			<th></th>
 		</thead>
 		<tbody>
 			<tr ng-repeat="item in items">
 				<td>{{item.lastEditAt}}</td>
+				<td>{{item.createdAt}}</td>
 				<td>{{item.title}}</td>
+				<td>{{item.excerpt}}</td>
 				<td>
 					<a href="#/page/{{item.id}}">open</a>
 					<a href="#/page/edit/{{item.id}}">edit</a>
@@ -22,7 +27,7 @@
 		ng-model="currentPage" 
 		total-items="totalItems"
 		max-size="maxSize"
-		ng-change="pageChanged()"
+		ng-change="refresh()"
 		>
 	</pagination>
 

@@ -8,6 +8,8 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using PagedList;
+using WikiEngine.Dto;
 using WikiEngine.Models;
 
 namespace WikiEngine.Controllers
@@ -17,9 +19,27 @@ namespace WikiEngine.Controllers
         private WikiEngineContext db = new WikiEngineContext();
 
         // GET: api/Page
-        public IQueryable<Page> GetPages()
+        public GetPagesOutput GetPages(int p = 1, string q = "", int pSize = 20)
         {
-            return db.Pages;
+            IEnumerable<Page> query = db.Pages;
+
+            if (!string.IsNullOrWhiteSpace(q))
+                query = query.Where(page => page.Title.Contains(q));
+
+            query = query.OrderBy(page => page.LastEditAt);
+
+            return new GetPagesOutput()
+            {
+                Items = query.ToPagedList(p, pSize).Select(page => new PageInList()
+                {
+                    Id = page.Id,
+                    CreatedAt = page.CreatedAt,
+                    LastEditAt = page.LastEditAt,
+                    Title = page.Title,
+                    Excerpt = page.Content.Substring(0, Math.Min(100, page.Content.Length))
+                }),
+                Count = query.Count()
+            };
         }
 
         // GET: api/Page/5
