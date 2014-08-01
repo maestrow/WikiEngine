@@ -1,10 +1,12 @@
 ﻿(function() {
 
     var mod = angular.module('app', [
+        'ngSanitize',
         'ngRoute',
         'ngResource',
         'ui.bootstrap',
-        'ui.utils'
+        'ui.utils',
+        'ui.codemirror'
     ]);
 
     mod.config(['$routeProvider', function($routeProvider) {

@@ -4,10 +4,10 @@
 
 @section scripts
 {
-  @Scripts.Render("~/bundles/modernizr")
-  @Scripts.Render("~/bundles/jquery")
-  @Scripts.Render("~/bundles/angular")
-  @Scripts.Render("~/bundles/app")
+  @Scripts.Render("~/bundles/js/jquery")
+  @Scripts.Render("~/bundles/js/angular")
+  @Scripts.Render("~/bundles/js/editor")
+  @Scripts.Render("~/bundles/js/app")
 }
 <div ng-app="app">
   <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,7 +30,7 @@
   </div>
   <div class="container body-content">
     @Html.Partial("~/app/layout.cshtml")
-    <hr />
+	<hr />
     <footer>
       <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>

@@ -1,7 +1,7 @@
 ﻿<div class="row">
 	<input ng-model="item.title" size="80" />
 	<br/>
-	<textarea ng-model="item.content" rows="20" cols="80"></textarea>
+	<ui-codemirror ng-model="item.content" ng-controller="CodemirrorSettings" ui-codemirror-opts="editorOptions"></ui-codemirror>
 	<a href ng-click="save()">Сохранить</a>
 	<a href="#/page/{{item.id}}">Отменить</a>
 </div>

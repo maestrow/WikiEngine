@@ -1,0 +1,61 @@
+﻿@section styles {
+  @Styles.Render("~/Content/css")
+}
+
+@section scripts
+{
+  @*Scripts.Render("~/bundles/js/jquery")*@
+  @Scripts.Render("~/bundles/js/angular")
+  @*Scripts.Render("~/bundles/js/codemirror")*@
+  @*Scripts.Render("~/bundles/js/app")*@
+}
+
+@*@section styles {
+	<link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.css" />
+}
+
+@section scripts {
+  <script src="~/bower_components/angular/angular.js"></script>
+  <script src="~/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+}*@
+
+<script>
+  angular
+	  .module('app', ['ui.bootstrap'])
+	  .constant('paginationConfig', {
+	    firstText: '«',
+	    previousText: '‹',
+	    nextText: '›',
+	    lastText: '»',
+	    itemsPerPage: 50,
+	    boundaryLinks: true,
+	    directionLinks: true,
+	    rotate: true
+	  })
+	  .controller('PaginationDemoCtrl', function ($scope) {
+	    $scope.totalItems = 640;
+	    $scope.currentPage = 4;
+
+	    $scope.setPage = function (pageNo) {
+	      $scope.currentPage = pageNo;
+	    };
+
+	    $scope.refresh = function () {
+	      console.log('Page changed to: ' + $scope.currentPage);
+	    };
+
+	    $scope.maxSize = 5;
+	  });
+
+</script>
+
+
+
+<div ng-app="app" ng-controller="PaginationDemoCtrl">
+  <pagination class="pagination-sm"
+              ng-model="currentPage"
+              total-items="totalItems"
+              max-size="maxSize"
+              ng-change="refresh()">
+  </pagination>
+</div>

@@ -1,7 +1,7 @@
 ﻿(function() {
-    var mod = angular.module('app');
+    angular.module('app')
 
-    mod.controller('app.views.page.edit', ['$scope', '$routeParams', '$location', 'Page',
+    .controller('app.views.page.edit', ['$scope', '$routeParams', '$location', 'Page',
         function ($scope, $routeParams, $location, Page) {
 
             var goTo = function(id) {
@@ -25,5 +25,14 @@
                     });
             };
         }
-    ]);
+    ])
+
+    .controller('CodemirrorSettings', ['$scope', function ($scope) {
+        $scope.editorOptions = {
+            lineWrapping: true,
+            lineNumbers: true,
+            mode: 'gfm',
+        };
+    }])
+    ;
 })();

@@ -8,31 +8,40 @@ namespace WikiEngine
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/js/jquery").Include(
+                "~/bower_components/jquery/dist/jquery.js"));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"
+            bundles.Add(new ScriptBundle("~/bundles/js/angular").Include(
+                "~/bower_components/angular/angular.js",
+                "~/bower_components/angular-sanitize/angular-sanitize.js",
+                "~/bower_components/angular-resource/angular-resource.js",
+                "~/bower_components/angular-route/angular-route.js",
+                "~/bower_components/angular-ui-utils/ui-utils.js",
+                "~/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
                 ));
+
+            bundles.Add(new ScriptBundle("~/bundles/js/editor").Include(
+                "~/bower_components/codemirror/lib/codemirror.js",
+                "~/bower_components/codemirror/mode/markdown/markdown.js",
+                "~/bower_components/codemirror/addon/mode/overlay.js",
+                "~/bower_components/codemirror/mode/xml/xml.js",
+                "~/bower_components/codemirror/mode/gfm/gfm.js",
+                "~/bower_components/marked/lib/marked.js",
+                "~/bower_components/angular-ui-codemirror/ui-codemirror.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/js/app")
+                .IncludeDirectory("~/app", "*.js")
+                .IncludeDirectory("~/app/settings", "*.js")
+                .IncludeDirectory("~/app/views/page", "*.js")
+                );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
+                "~/bower_components/fontawesome/css/font-awesome.css",
+                "~/bower_components/bootstrap/dist/css/bootstrap.css",
+                "~/bower_components/bootstrap/dist/css/bootstrap-theme.css",
+                "~/bower_components/codemirror/lib/codemirror.css",
                 "~/Content/site.css"
-                ));
-
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                "~/Scripts/angular.js",
-                "~/Scripts/angular-resource.js",
-                "~/Scripts/angular-route.js",
-                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
-                "~/Scripts/angular-ui/ui-utils.js"
-                ));
-
-            bundles.Add(new ScriptBundle("~/bundles/app")
-                .IncludeDirectory("~/app", "*.js")
-                .IncludeDirectory("~/app/views/page", "*.js", true
                 ));
         }
     }

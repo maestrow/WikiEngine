@@ -1,0 +1,39 @@
+﻿@section styles {
+  @Styles.Render("~/Content/css")
+}
+
+@section scripts {
+  @Scripts.Render("~/bundles/js/jquery")
+  @Scripts.Render("~/bundles/js/angular")
+  @Scripts.Render("~/bundles/js/editor")
+}
+
+<script>
+	
+  angular
+  .module('app', ['ui.codemirror'])
+  .controller('CodemirrorSettings', ['$scope', function ($scope) {
+    $scope.editorOptions = {
+      lineWrapping: true,
+      lineNumbers: true,
+      mode: 'gfm',
+    };
+  }]);
+
+</script>
+
+<ui-codemirror ng-app="app" ng-controller="CodemirrorSettings" ui-codemirror-opts="editorOptions">
+#Heading
+
+Lorem ipsum dolor sit **amet**, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. [This is a link](#)
+
+* Item
+* Item
+* Item
+
+## Heading
+
+Ut enim ad *minim* veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+&lt;a href="#"&gt;This link is written in HTML&lt;/a&gt;
+</ui-codemirror>
