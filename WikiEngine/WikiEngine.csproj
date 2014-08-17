@@ -161,6 +161,7 @@
     <Content Include="app\views\page\item.js" />
     <Content Include="app\views\page\list.html" />
     <Content Include="app\views\page\list.js" />
+    <Content Include="Content\jumbotron-narrow.css" />
     <Content Include="Global.asax" />
     <Content Include="app\app.js" />
     <Content Include="app\views\page\services.js" />
@@ -168,7 +169,9 @@
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
     <None Include="app\layout.cshtml" />
-    <Content Include="app\Web.config" />
+    <Content Include="app\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="bower.json" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

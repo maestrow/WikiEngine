@@ -1,2 +1,27 @@
-﻿<a href="#/page/new">Новая</a>
-<div ng-view></div>
+﻿<div ng-app="app" class="container">
+  <div class="header">
+	  <ul class="nav nav-pills pull-right">
+		  <li class="active"><a href="#">Home</a></li>
+		  <li><a href="#">About</a></li>
+		  <li><a href="#">Contact</a></li>
+	  </ul>
+	  <h3 class="text-muted">Персональная База Знаний</h3>
+  </div>
+
+  <div class="search">
+	<span>Поиск: </span>
+	<input name="text" maxlength="400">
+  </div>
+
+  <div class="row marketing">
+    <a href="#/page/new">Новая</a>
+    <div ng-view></div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; FileTable Wiki Engine 2014</p>
+  </div>
+
+</div> <!-- /container -->
+
+

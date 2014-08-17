@@ -36,13 +36,14 @@ namespace WikiEngine
                 .IncludeDirectory("~/app/views/page", "*.js")
                 );
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/bower_components/fontawesome/css/font-awesome.css",
-                "~/bower_components/bootstrap/dist/css/bootstrap.css",
-                "~/bower_components/bootstrap/dist/css/bootstrap-theme.css",
-                "~/bower_components/codemirror/lib/codemirror.css",
-                "~/Content/site.css"
-                ));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include(
+                    "~/bower_components/fontawesome/css/font-awesome.css",
+                    "~/bower_components/bootstrap/dist/css/bootstrap.css",
+                    "~/bower_components/bootstrap/dist/css/bootstrap-theme.css",
+                    "~/bower_components/codemirror/lib/codemirror.css"
+                )
+                .IncludeDirectory("~/Content", "*.css"));
         }
     }
 }
