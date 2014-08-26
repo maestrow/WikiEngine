@@ -146,7 +146,20 @@
     <Compile Include="Migrations\201407121545216_InitialCreate.Designer.cs">
       <DependentUpon>201407121545216_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408261731458_FileTable.cs" />
+    <Compile Include="Migrations\201408261731458_FileTable.Designer.cs">
+      <DependentUpon>201408261731458_FileTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408262042415_FileStreamProperties.cs" />
+    <Compile Include="Migrations\201408262042415_FileStreamProperties.Designer.cs">
+      <DependentUpon>201408262042415_FileStreamProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408262056037_FileTable_Data.cs" />
+    <Compile Include="Migrations\201408262056037_FileTable_Data.Designer.cs">
+      <DependentUpon>201408262056037_FileTable_Data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\DbMigrationBase.cs" />
     <Compile Include="Models\WikiEngineContext.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -194,6 +207,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201407121545216_InitialCreate.resx">
       <DependentUpon>201407121545216_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408261731458_FileTable.resx">
+      <DependentUpon>201408261731458_FileTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408262042415_FileStreamProperties.resx">
+      <DependentUpon>201408262042415_FileStreamProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408262056037_FileTable_Data.resx">
+      <DependentUpon>201408262056037_FileTable_Data.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
