@@ -135,7 +135,6 @@
     <Compile Include="App_Start\SerializationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PageAsyncController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Dto\GetPagesOutput.cs" />
@@ -162,6 +161,7 @@
     <Content Include="app\views\page\list.html" />
     <Content Include="app\views\page\list.js" />
     <Content Include="Content\jumbotron-narrow.css" />
+    <Content Include="Content\search-box.css" />
     <Content Include="Global.asax" />
     <Content Include="app\app.js" />
     <Content Include="app\views\page\services.js" />

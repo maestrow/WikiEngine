@@ -1,5 +1,10 @@
 ﻿<div class="row">
-	Поиск: <input ng-model="search" ui-event="{ blur: 'refresh()' }" />
+	
+	<form class="searchbox clearfix">
+    <input ng-model="search" ui-event="{ blur: 'refresh()' }" maxlength="400" type="text" placeholder="Поиск..." required />
+    <button type="submit">Искать</button>
+	</form>
+
 	<table border="1">
 		<thead>
 			<th>Создан</th>
