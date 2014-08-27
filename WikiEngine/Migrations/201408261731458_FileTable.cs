@@ -6,7 +6,19 @@ namespace WikiEngine.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
+    /*
+        select * from sys.filegroups
+
+        select
+            sys.database_files.name
+            ,sys.data_spaces.*
+        from 
+            sys.database_files
+            inner join sys.data_spaces on sys.database_files.data_space_id = sys.data_spaces.data_space_id
+     **/
+
+
     public partial class FileTable : DbMigrationBase
     {
         public override void Up()
