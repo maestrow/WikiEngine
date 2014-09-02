@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace WikiEngine.Controllers
         // GET: api/Page
         public GetPagesOutput GetPages(int p = 1, string q = "", int pSize = 20)
         {
-            IEnumerable<Page> query = db.Pages;
+            IEnumerable<Page> query = db.Set<Page>();
 
             if (!string.IsNullOrWhiteSpace(q))
                 query = query.Where(page => page.Title.Contains(q));
@@ -46,7 +45,7 @@ namespace WikiEngine.Controllers
         [ResponseType(typeof(Page))]
         public IHttpActionResult GetPage(int id)
         {
-            Page page = db.Pages.Find(id);
+            Page page = db.Set<Page>().Find(id);
             if (page == null)
             {
                 return NotFound();
@@ -99,7 +98,7 @@ namespace WikiEngine.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Pages.Add(page);
+            db.Set<Page>().Add(page);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = page.Id }, page);
@@ -109,13 +108,13 @@ namespace WikiEngine.Controllers
         [ResponseType(typeof(Page))]
         public IHttpActionResult DeletePage(int id)
         {
-            Page page = db.Pages.Find(id);
+            Page page = db.Set<Page>().Find(id);
             if (page == null)
             {
                 return NotFound();
             }
 
-            db.Pages.Remove(page);
+            db.Set<Page>().Remove(page);
             db.SaveChanges();
 
             return Ok(page);
@@ -132,7 +131,7 @@ namespace WikiEngine.Controllers
 
         private bool PageExists(int id)
         {
-            return db.Pages.Count(e => e.Id == id) > 0;
+            return db.Set<Page>().Count(e => e.Id == id) > 0;
         }
     }
 }

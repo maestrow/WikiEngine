@@ -21,7 +21,9 @@ namespace WikiEngine.Models
             this.Configuration.ProxyCreationEnabled = false;
         }
 
-        public System.Data.Entity.DbSet<WikiEngine.Models.Page> Pages { get; set; }
-    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Page>().ToTable("Page");
+        }
     }
 }
