@@ -25,12 +25,12 @@ namespace WikiEngine.Controllers
         // GET: api/Page
         public GetPagesOutput GetPages(int p = 1, string q = "", int pSize = 20)
         {
-            IEnumerable<File> query = db.Set<File>();
+            IQueryable<File> query = db.Set<File>();
 
             if (!string.IsNullOrWhiteSpace(q))
                 query = query.Where(file => file.Name.Contains(q));
 
-            query = query.OrderBy(file => file.Last_access_time);
+            query = query.OrderBy(file => file.Last_write_time);
 
             var pagedList = query.ToPagedList(p, pSize);
 
