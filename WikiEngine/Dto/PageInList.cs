@@ -7,7 +7,7 @@ namespace WikiEngine.Dto
 {
     public class PageInList
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public DateTime LastEditAt { get; set; }

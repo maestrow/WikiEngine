@@ -112,6 +112,7 @@
     <Compile Include="App_Start\SerializationConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PageOldController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Dto\GetPagesOutput.cs" />
@@ -119,23 +120,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201409021438080_InitialCreate.cs" />
-    <Compile Include="Migrations\201409021438080_InitialCreate.Designer.cs">
-      <DependentUpon>201409021438080_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409021442478_InitFilestream.cs" />
-    <Compile Include="Migrations\201409021442478_InitFilestream.Designer.cs">
-      <DependentUpon>201409021442478_InitFilestream.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201409021447510_File.cs" />
-    <Compile Include="Migrations\201409021447510_File.Designer.cs">
-      <DependentUpon>201409021447510_File.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\File.cs" />
-    <Compile Include="Models\FileDbContext.cs" />
-    <Compile Include="Models\WikiEngineContext.cs" />
-    <Compile Include="Models\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,15 +167,10 @@
     <Content Include="Views\Test\UIBootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409021438080_InitialCreate.resx">
-      <DependentUpon>201409021438080_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409021442478_InitFilestream.resx">
-      <DependentUpon>201409021442478_InitFilestream.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201409021447510_File.resx">
-      <DependentUpon>201409021447510_File.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\WikiEngine.Dal\WikiEngine.Dal.csproj">
+      <Project>{d7b592bb-42ee-437f-8342-ff2d0c57c4cf}</Project>
+      <Name>WikiEngine.Dal</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

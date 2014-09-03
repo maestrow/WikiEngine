@@ -5,119 +5,103 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PagedList;
+using WikiEngine.Dal.Models;
 using WikiEngine.Dto;
-using WikiEngine.Models;
 
 namespace WikiEngine.Controllers
 {
     public class PageController : ApiController
     {
         private WikiEngineContext db = new WikiEngineContext();
+        private FileDbContext files = new FileDbContext();
 
         // GET: api/Page
         public GetPagesOutput GetPages(int p = 1, string q = "", int pSize = 20)
         {
-            IEnumerable<Page> query = db.Set<Page>();
+            IEnumerable<File> query = db.Set<File>();
 
             if (!string.IsNullOrWhiteSpace(q))
-                query = query.Where(page => page.Title.Contains(q));
+                query = query.Where(file => file.Name.Contains(q));
 
-            query = query.OrderBy(page => page.LastEditAt);
+            query = query.OrderBy(file => file.Last_access_time);
 
             return new GetPagesOutput()
             {
-                Items = query.ToPagedList(p, pSize).Select(page => new PageInList()
+                Items = query.ToPagedList(p, pSize).Select(file => new PageInList()
                 {
-                    Id = page.Id,
-                    CreatedAt = page.CreatedAt,
-                    LastEditAt = page.LastEditAt,
-                    Title = page.Title,
-                    Excerpt = page.Content.Substring(0, Math.Min(100, page.Content.Length))
+                    Id = file.Stream_id,
+                    CreatedAt = file.Creation_time.DateTime,
+                    LastEditAt = file.Last_access_time.DateTime,
+                    Title = file.Name,
+                    Excerpt = getExcerpt(file.File_stream)
                 }),
                 Count = query.Count()
             };
         }
 
         // GET: api/Page/5
-        [ResponseType(typeof(Page))]
-        public IHttpActionResult GetPage(int id)
+        [ResponseType(typeof(File))]
+        public IHttpActionResult GetPage(Guid id)
         {
-            Page page = db.Set<Page>().Find(id);
-            if (page == null)
+            File file = db.Set<File>().Find(id);
+            if (file == null)
             {
                 return NotFound();
             }
 
-            return Ok(page);
+            return Ok(file);
         }
 
         // PUT: api/Page/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPage(int id, Page page)
+        public IHttpActionResult PutPage(Guid id, File file)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != page.Id)
+            if (id != file.Stream_id)
             {
                 return BadRequest();
             }
 
-            db.Entry(page).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PageExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            files.Update.CallStoredProc(file);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Page
-        [ResponseType(typeof(Page))]
-        public IHttpActionResult PostPage(Page page)
+        [ResponseType(typeof(File))]
+        public IHttpActionResult PostPage(File file)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Set<Page>().Add(page);
-            db.SaveChanges();
+            files.CreateFile.CallStoredProc(file);
 
-            return CreatedAtRoute("DefaultApi", new { id = page.Id }, page);
+            return CreatedAtRoute("DefaultApi", new { id = file.Stream_id }, file);
         }
 
         // DELETE: api/Page/5
-        [ResponseType(typeof(Page))]
-        public IHttpActionResult DeletePage(int id)
+        [ResponseType(typeof(File))]
+        public IHttpActionResult DeletePage(Guid id)
         {
-            Page page = db.Set<Page>().Find(id);
-            if (page == null)
+            File file = db.Set<File>().Find(id);
+            if (file == null)
             {
                 return NotFound();
             }
 
-            db.Set<Page>().Remove(page);
-            db.SaveChanges();
+            files.Delete.CallStoredProc(new File() {Stream_id = id});
 
-            return Ok(page);
+            return Ok(file);
         }
 
         protected override void Dispose(bool disposing)
@@ -129,9 +113,14 @@ namespace WikiEngine.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PageExists(int id)
+        #region Private Methods
+
+        private string getExcerpt(byte[] bytes)
         {
-            return db.Set<Page>().Count(e => e.Id == id) > 0;
+            string content = Encoding.UTF8.GetString(bytes);
+            return content.Substring(0, Math.Min(100, content.Length));
         }
+
+        #endregion
     }
 }

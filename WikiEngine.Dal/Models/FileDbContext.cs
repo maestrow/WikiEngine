@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using FiletableDataContext.Domain;
+﻿using FiletableDataContext.Domain;
 
-namespace WikiEngine.Models
+namespace WikiEngine.Dal.Models
 {
     public class FileDbContext: FiletableDbContext<File>
     {

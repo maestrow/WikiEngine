@@ -1,18 +1,16 @@
-namespace WikiEngine.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
+using WikiEngine.Dal.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WikiEngine.Models.WikiEngineContext>
+namespace WikiEngine.Dal.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<WikiEngineContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(WikiEngine.Models.WikiEngineContext context)
+        protected override void Seed(WikiEngineContext context)
         {
             //  This method will be called after migrating to the latest version.
 

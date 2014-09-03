@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace WikiEngine.Models
+namespace WikiEngine.Dal.Models
 {
     public class Page
     {

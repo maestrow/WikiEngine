@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
-namespace WikiEngine.Models
+namespace WikiEngine.Dal.Models
 {
     public class WikiEngineContext : DbContext
     {
@@ -24,6 +20,7 @@ namespace WikiEngine.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Page>().ToTable("Page");
+            modelBuilder.Entity<File>().ToTable("File_View");
         }
     }
 }
