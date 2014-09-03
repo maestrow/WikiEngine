@@ -8,9 +8,12 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CodeFirstStoredProcs;
+using FiletableDataContext.Domain;
 using PagedList;
 using WikiEngine.Dal.Models;
 using WikiEngine.Dto;
+using WikiEngine.Dto.Page;
 
 namespace WikiEngine.Controllers
 {
@@ -29,9 +32,11 @@ namespace WikiEngine.Controllers
 
             query = query.OrderBy(file => file.Last_access_time);
 
+            var pagedList = query.ToPagedList(p, pSize);
+
             return new GetPagesOutput()
             {
-                Items = query.ToPagedList(p, pSize).Select(file => new PageInList()
+                Items = pagedList.Select(file => new PageInList()
                 {
                     Id = file.Stream_id,
                     CreatedAt = file.Creation_time.DateTime,
@@ -44,7 +49,7 @@ namespace WikiEngine.Controllers
         }
 
         // GET: api/Page/5
-        [ResponseType(typeof(File))]
+        [ResponseType(typeof(PageDto))]
         public IHttpActionResult GetPage(Guid id)
         {
             File file = db.Set<File>().Find(id);
@@ -53,40 +58,71 @@ namespace WikiEngine.Controllers
                 return NotFound();
             }
 
-            return Ok(file);
+            var result = new PageDto()
+            {
+                Id = file.Stream_id,
+                Title = file.Name,
+                CreatedAt = file.Creation_time.DateTime,
+                LastEditAt = file.Last_access_time.DateTime,
+                Content = Encoding.UTF8.GetString(file.File_stream)
+            };
+
+            return Ok(result);
         }
 
         // PUT: api/Page/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPage(Guid id, File file)
+        public IHttpActionResult PutPage(Guid id, PageDto page)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != file.Stream_id)
+            if (id != page.Id)
             {
                 return BadRequest();
             }
 
-            files.Update.CallStoredProc(file);
+            var file = db.Set<File>().Single(f => f.Stream_id == id);
+
+            if (file.Name != page.Title)
+            {
+                file.Name = page.Title;
+                files.Rename.CallStoredProc(file);
+            }
+
+            if (Encoding.UTF8.GetString(file.File_stream) != page.Content)
+            {
+                file.File_stream = Encoding.UTF8.GetBytes(page.Content);
+                files.Update.CallStoredProc(file);
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Page
-        [ResponseType(typeof(File))]
-        public IHttpActionResult PostPage(File file)
+        [ResponseType(typeof(PageDto))]
+        public IHttpActionResult PostPage(PageDto page)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            files.CreateFile.CallStoredProc(file);
+            var file = new File()
+            {
+                Name = page.Title,
+                File_stream = Encoding.UTF8.GetBytes(page.Content),
+                Creation_time = page.CreatedAt.ToLocalTime(),
+                Last_write_time = page.LastEditAt.ToLocalTime()
+            };
 
-            return CreatedAtRoute("DefaultApi", new { id = file.Stream_id }, file);
+            ResultsList spResult = files.CreateFile.CallStoredProc(file);
+            CreateResult createResult = spResult.ToList<CreateResult>().First();
+
+            page.Id = createResult.Stream_id;
+            return CreatedAtRoute("DefaultApi", new { id = createResult.Stream_id }, page);
         }
 
         // DELETE: api/Page/5

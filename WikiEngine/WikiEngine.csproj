@@ -115,8 +115,9 @@
     <Compile Include="Controllers\PageOldController.cs" />
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Dto\GetPagesOutput.cs" />
-    <Compile Include="Dto\PageInList.cs" />
+    <Compile Include="Dto\Page\PageDto.cs" />
+    <Compile Include="Dto\Page\GetPagesOutput.cs" />
+    <Compile Include="Dto\Page\PageInList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
